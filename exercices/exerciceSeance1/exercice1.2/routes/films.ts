@@ -28,11 +28,13 @@ const Film: Film[] = [
     },
   ];
 
-
   router.get("/", (req, res) => {
           if (req.query.order && typeof req.query.order !== "string") {
               return res.sendStatus(400);
-          } else{return res.json(Film);}
+          } 
+          
+        
+          return res.json(Film);
       })
 
 
