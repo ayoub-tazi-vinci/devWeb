@@ -1,0 +1,44 @@
+######### NORMAL OPERATION  ###########
+
+### Read all films
+GET http://localhost:3000/films
+
+### Read all films with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/films
+
+### Read all films with minimum duration
+GET {{baseUrl}}/films/?min-duration=5
+
+
+### Read a single film
+GET {{baseUrl}}/films/6
+
+
+
+
+
+
+### Create a film
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title": "The Godfathers",
+    "director": "Francis Ford Coppola",
+    "duration": 175
+   
+}
+
+### Try to create a films with incomplete data
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title":"Missing Data Drink",
+    "director":"yaoa"
+        
+}
+
+
+
