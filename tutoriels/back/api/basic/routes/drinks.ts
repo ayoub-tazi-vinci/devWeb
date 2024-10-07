@@ -21,6 +21,8 @@ router.get("/:id", (req, res) => {
 });
 
 
+
+
 router.get("/", (req, res) => {
     if (!req.query["budget-max"]) {
       // Cannot call req.query.budget-max as "-" is an operator
@@ -71,6 +73,66 @@ router.get("/", (req, res) => {
     drinks.push(newDrink);
     return res.json(newDrink);
   });
+
+
+  router.delete("/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const index = drinks.findIndex((drink) => drink.id === id);
+    if (index === -1) {
+      return res.sendStatus(404);
+    }
+    const deletedElements = drinks.splice(index,1); // splice() returns an array of the deleted elements
+    return res.json(deletedElements[0]);
+  });
+
+
+
+  
+
+  router.patch("/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const drink = drinks.find((drink) => drink.id === id);
+    if (!drink) {
+      return res.sendStatus(404);
+    }
+  
+    const body: unknown = req.body;
+  
+    if (
+      !body ||
+      typeof body !== "object" ||
+      ("title" in body &&
+        (typeof body.title !== "string" || !body.title.trim())) ||
+      ("image" in body &&
+        (typeof body.image !== "string" || !body.image.trim())) ||
+      ("volume" in body &&
+        (typeof body.volume !== "number" || body.volume <= 0)) ||
+      ("price" in body && (typeof body.price !== "number" || body.price <= 0))
+    ) {
+      return res.sendStatus(400);
+    }
+  
+    const { title, image, volume, price }: Partial<NewDrink> = body;
+  
+    if (title) {
+      drink.title = title;
+    }
+    if (image) {
+      drink.image = image;
+    }
+    if (volume) {
+      drink.volume = volume;
+    }
+    if (price) {
+      drink.price = price;
+    }
+  
+    return res.json(drink);
+  });
+  
+
+
+  
   
   
   
