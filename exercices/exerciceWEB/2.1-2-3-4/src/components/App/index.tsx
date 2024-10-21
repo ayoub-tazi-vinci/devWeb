@@ -70,7 +70,7 @@ const App = () => {
 
       <Cinema name={cinema2Name} movies={moviesCinema2} />
 
-      <Footer children={footer.title} image={footer.image} />
+      <Footer image={footer.image}><p>copyright {footer.title}</p></Footer>
     </div>
   );
 };
