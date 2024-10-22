@@ -8,7 +8,7 @@ function App() {
 
   return (
 
-    <ClickCounter title="bienvenue " message="You are a master in the art of clicking !" />
+    <ClickCounter title="bienvenue " message="You are a master in the art of clicking !" messageHover="Please click on me now !" />
    
   )
 }

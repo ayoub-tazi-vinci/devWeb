@@ -6,16 +6,28 @@ import './index.css';
 interface ClickCounterProps {
   title : string;
   message : string;
+  messageHover : string;
 
 }
 
-const ClickCounter  = ({ title , message }: ClickCounterProps) => {
+const ClickCounter  = ({ title , message, messageHover }: ClickCounterProps) => {
   const [count, setCount] = useState(0);
+  const [hover, setHover] = useState(false);
 
   const handleSetCount = () => {
-
     setCount((count) => count + 1)
   }
+
+  const handleMouseOver = () => {
+    setHover(true)
+  }
+
+  const handleMouseExit = () => {
+    setHover(false)
+  }
+
+
+
 
   return (
     <div>
@@ -30,9 +42,15 @@ const ClickCounter  = ({ title , message }: ClickCounterProps) => {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={handleSetCount}>
+       
+        <button 
+        onClick={handleSetCount}
+        onMouseOver={handleMouseOver}
+        onMouseLeave={handleMouseExit}
+                   >
           count is {count}
         </button>
+        {hover ? <p>{messageHover}</p> : null }
         {count >=10 ? <p>{message}</p> : null}
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
