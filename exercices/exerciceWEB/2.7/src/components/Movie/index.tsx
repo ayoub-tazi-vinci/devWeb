@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import MovieMenu from "./MovieMenu";
-import { Movie } from "../../type";
+import type { Movie } from "../../type";
 
 const defaultMovies = [
   {
