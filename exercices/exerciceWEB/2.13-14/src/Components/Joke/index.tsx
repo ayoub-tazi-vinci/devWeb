@@ -8,7 +8,7 @@ interface Joke {
 const Joke = () => {
   const [joke, setJoke] = useState<Joke>({ category: "", joke: "" });
 
-  useEffect(() => {
+  const fetchJoke = () => {
     fetch("https://v2.jokeapi.dev/joke/Any?type=single")
       .then((response) => {
         if (!response.ok) {
@@ -19,6 +19,12 @@ const Joke = () => {
 
       .then((joke) => setJoke(joke))
       .catch((error) => console.error("Error fetching joke:", error));
+  };
+
+  useEffect(() => {
+    fetchJoke();
+    const interval = setInterval(fetchJoke, 10000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
