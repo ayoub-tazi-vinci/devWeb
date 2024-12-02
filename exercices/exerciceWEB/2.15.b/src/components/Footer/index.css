@@ -1,0 +1,28 @@
+/* Header.css */
+.footer {
+  position: relative;
+  width: 259%;
+  background-color: #333;
+  bottom: 0;
+ 
+
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navbar button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.navbar button:hover {
+  background-color: #555;
+}
