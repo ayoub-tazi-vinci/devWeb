@@ -1,67 +1,100 @@
-######### NORMAL OPERATION  ###########
+@baseUrl = http://localhost:3000
+
+######### USER OPERATIONS ###########
+
+### Register a new user
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+    "username": "newuser",
+    "password": "newpassword"
+}
+
+### Login with the new user
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username": "newuser",
+    "password": "newpassword"
+}
+
+### Save the JWT token from the login response
+@jwtToken = <your_jwt_token_here>
+
+### Login with an incorrect password
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username": "newuser",
+    "password": "wrongpassword"
+}
+
+######### FILM OPERATIONS ###########
 
 ### Read all films
-GET http://localhost:3000/films
-
-### Read all films with File variable
-@baseUrl = http://localhost:3000
 GET {{baseUrl}}/films
 
 ### Read all films with minimum duration
-GET {{baseUrl}}/films/?min-duration=0
-
+GET {{baseUrl}}/films?minimum-duration=120
 
 ### Read a single film
-GET {{baseUrl}}/films/6
+GET {{baseUrl}}/films/1
 
-### Create a film
+### Create a film (requires JWT)
 POST {{baseUrl}}/films
 Content-Type: application/json
+Authorization: Bearer {{jwtToken}}
 
 {
     "title": "The Godfathers",
     "director": "Francis Ford Coppola",
-    "duration": 175
-   
+    "duration": 175,
+    "budget": 6000000,
+    "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+    "imageUrl": "http://example.com/godfathers.jpg"
 }
 
-### Try to create a films with incomplete data
+### Try to create a film with incomplete data (requires JWT)
 POST {{baseUrl}}/films
 Content-Type: application/json
+Authorization: Bearer {{jwtToken}}
 
 {
-    "title":"Missing Data Drink",
-    "director":"yaoa"
-        
+    "title": "Incomplete Film",
+    "director": "Unknown Director"
 }
 
-### Delete a film
-DELETE {{baseUrl}}/films/2
-
-
-
-### Update the film
+### Update a film (requires JWT)
 PATCH {{baseUrl}}/films/1
 Content-Type: application/json
+Authorization: Bearer {{jwtToken}}
 
 {
-    "title":"Citronn",
+    "title": "Inception Updated",
     "duration": 150
 }
 
+### Delete a film (requires JWT)
+DELETE {{baseUrl}}/films/1
+Authorization: Bearer {{jwtToken}}
 
-### Update the film or add
+######### DRINK OPERATIONS ###########
 
-PUT {{baseUrl}}/films/8
+### Create a drink (requires JWT and admin)
+POST {{baseUrl}}/drinks
 Content-Type: application/json
+Authorization: Bearer {{jwtToken}}
 
 {
-    "title":"Citronn",
-    "duration": 150,
-    "director":"kevin"
+    "name": "Coca Cola",
+    "image": "http://example.com/cocacola.jpg",
+    "volume": 500,
+    "price": 2.5
 }
 
-
-
-
-
+### Delete a drink (requires JWT and admin)
+DELETE {{baseUrl}}/drinks/1
+Authorization: Bearer {{jwtToken}}

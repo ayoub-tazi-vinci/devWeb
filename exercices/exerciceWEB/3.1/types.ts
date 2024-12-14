@@ -13,19 +13,21 @@ interface PizzaToUpdate {
 
 type NewPizza = Omit<Pizza, "id">;
 
-interface Drink {
+interface Film {
   id: number;
   title: string;
-  image: string;
-  volume: number;
-  price: number;
+  director: string;
+  duration: number;
+  budget?: number;
+  description?: string;
+  imageUrl?: string;
 }
 
-type NewDrink = Omit<Drink, "id">;
+type newFilm = Omit<Film, "id">;
 
-interface AuthenticatedUser {
-  username: string;
-  token: string;
+interface Comment {
+  id: number;
+  content: string;
 }
 
 interface User {
@@ -34,7 +36,11 @@ interface User {
   password: string;
 }
 
-type PotentialUser = Omit<User, "id">;
+interface AuthenticatedUser {
+  id: number;
+  username: string;
+  token: string;
+}
 
 interface AuthenticatedRequest extends Request {
   user?: User;
@@ -46,29 +52,34 @@ interface JwtPayload {
   iat: number; // Issued at time (in seconds since the epoch)
 }
 
-
-interface Film {
-  id:number;
-  title:string;
-  director:string;
-  duration:number;
-  budget?:number;
-  description?:string;
-  imageUrl?:string;
+interface Drink {
+  id: number;
+  title: string;
+  image: string;
+  volume: number;
+  price: number;
 }
-type newFilm = Omit <Film , "id">;
+
+type NewDrink = Omit<Drink, "id">;
+
+interface PotentialUser {
+  username: string;
+  password: string;
+}
+
 
 export type {
   Pizza,
-  NewPizza,
   PizzaToUpdate,
-  Drink,
-  NewDrink,
-  AuthenticatedUser,
+  NewPizza,
+  Film,
+  newFilm,
+  Comment,
   User,
-  PotentialUser,
+  AuthenticatedUser,
   AuthenticatedRequest,
   JwtPayload,
-  Film,
-  newFilm
+  Drink,
+  NewDrink,
+  PotentialUser
 };

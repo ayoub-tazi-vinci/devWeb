@@ -37,6 +37,7 @@ async function login(
   const authenticatedUser: AuthenticatedUser = {
     username,
     token,
+    id: 0
   };
 
   return authenticatedUser;
@@ -60,6 +61,7 @@ async function register(
   const authenticatedUser: AuthenticatedUser = {
     username,
     token,
+    id: 0
   };
 
   return authenticatedUser;

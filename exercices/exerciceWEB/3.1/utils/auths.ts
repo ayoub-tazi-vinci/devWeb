@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import { readOneUserFromUsername } from "../services/users";
 import { NextFunction, RequestHandler, Response } from "express";
-import { AuthenticatedRequest, JwtPayload, User } from "../types";
+import { AuthenticatedRequest, User } from "../types";
+import { JwtPayload } from "../types";
 
 const jwtSecret = "ilovemypizza!";
 
